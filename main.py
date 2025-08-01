@@ -13,22 +13,27 @@ from tools.time import get_time
 
 load_dotenv()
 
-MIC_INDEX = 0
 TRIGGER_WORD = "jarvis"
 CONVERSATION_TIMEOUT = 30  # seconds of inactivity before exiting conversation mode
 
 logging.basicConfig(level=logging.DEBUG) # logging
 
-# api_key = os.getenv("OPENAI_API_KEY") removed because it's not needed for ollama
-# org_id = os.getenv("OPENAI_ORG_ID") removed because it's not needed for ollama
-
 recognizer = sr.Recognizer()
-mic = sr.Microphone(device_index=MIC_INDEX)
+
+print("🔊 Available microphones:\n")
+for i, mic_name in enumerate(sr.Microphone.list_microphone_names()):
+    print(f"[{i}] {mic_name}")
+
+while True:
+    try:
+        MIC_INDEX = int(input("\n🎙️ Select your mic index: "))
+        mic = sr.Microphone(device_index=MIC_INDEX)
+        break
+    except (ValueError, OSError):
+        print("💀 Invalid index, try again.")
 
 # Initialize LLM
 llm = ChatOllama(model="qwen3:1.7b", reasoning=False)
-
-# llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, organization=org_id) for openai
 
 # Tool list
 tools = [get_time]

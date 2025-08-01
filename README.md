@@ -1,3 +1,12 @@
+# I have made this Jarvis program work for windows,
+Run ```pip install -r requirements.txt```
+Next, install the llm by running ```ollama pull qwen3:1.7b``` make sure you have ollama installed by getting from https://ollama.com/download
+Now you can run by using, ```python main.py```
+
+I have added a few things including
+Microphone selection
+Working extentions
+
 # 🧠 Jarvis – Local Voice-Controlled AI Assistant
 
 **Jarvis** is a voice-activated, conversational AI assistant powered by a local LLM (Qwen via Ollama). It listens for a wake word, processes spoken commands using a local language model with LangChain, and responds out loud via TTS. It supports tool-calling for dynamic functions like checking the current time.
